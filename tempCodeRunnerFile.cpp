@@ -1,1 +1,1 @@
-n
+std::cout<<std::addressof(player);
