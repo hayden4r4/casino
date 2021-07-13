@@ -52,7 +52,6 @@ public:
     }
 };
 
-
 void lucky_number(Player &player, bool first_run)
 {
     Lucky_number_attrs attrs;
@@ -80,7 +79,7 @@ void lucky_number(Player &player, bool first_run)
                 std::cin >> guess;
             }
             attrs.set_guess(guess);
-            
+
             if (attrs.get_guess() == attrs.get_secret())
             {
                 std::cout << "\nYou Got It!\n";
@@ -110,7 +109,7 @@ void lucky_number(Player &player, bool first_run)
                     std::cin >> choice;
                     attrs.set_choice(choice);
                 }
-                while ((attrs.get_choice() != 0) && (attrs.get_choice() <= 3))
+                if ((attrs.get_choice() != 0) && (attrs.get_choice() <= 3))
                 {
                     if (attrs.get_choice() == 1)
                     {
@@ -118,11 +117,13 @@ void lucky_number(Player &player, bool first_run)
                     }
                     else if (attrs.get_choice() == 2)
                     {
+                        attrs.init();
                         selector(player);
                     }
                     else if (attrs.get_choice() == 3)
                     {
-                        // Save to leaderboard
+                        // Save to leaderboard and exit
+                        write_leaderboard(player);
                         exit(0);
                     }
                 }
@@ -131,19 +132,20 @@ void lucky_number(Player &player, bool first_run)
             {
                 if ((attrs.get_attempts() == 1) || (attrs.get_attempts() == 2))
                 {
-                std::cout << "Wrong! Try Again:";
+                    std::cout << "Wrong! Try Again:";
                 }
                 else if (attrs.get_attempts() == 3)
                 {
-                std::cout << "Wrong!\n";
+                    std::cout << "Wrong!\n";
                 }
-            } 
+            }
         }
         player.add_balance(-10);
         std::cout << "You Lose! We will be taking $10, Thanks for Your Donation to the House!\n";
         std::cout << "Your New Balance is: $" << player.get_balance() << std::endl;
         if (player.get_balance() < 10)
         {
+            attrs.init();
             selector(player);
         }
         std::cout << " 1. Replay\n 2. Choose Another Game\n 3. Walk" << std::endl;
@@ -156,7 +158,7 @@ void lucky_number(Player &player, bool first_run)
             std::cin >> choice;
             attrs.set_choice(choice);
         }
-        while ((attrs.get_choice() != 0) && (attrs.get_choice() <= 3))
+        if ((attrs.get_choice() != 0) && (attrs.get_choice() <= 3))
         {
             if (attrs.get_choice() == 1)
             {
@@ -164,14 +166,17 @@ void lucky_number(Player &player, bool first_run)
             }
             else if (attrs.get_choice() == 2)
             {
+                attrs.init();
                 selector(player);
             }
             else if (attrs.get_choice() == 3)
             {
-                // Save to leaderboard
+                // Save to leaderboard and exit
+                write_leaderboard(player);
                 exit(0);
             }
         }
     }
+    attrs.init();
     selector(player);
 }

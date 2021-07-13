@@ -1,20 +1,42 @@
 #include <fstream>
 #include <filesystem>
+#include <vector>
+#include <iterator>
+#include <algorithm>
 
-void create_leaderboard()
+void show_leaderboard()
 {
-    // Must be compiled with --std=c++17 -lstdc++fs as filesystem is a C++17 feature.
-
-    // Create Leaderboard.txt file if it doesn't already exist in working directory.
-    if (std::filesystem::exists("leaderboard.txt") == false)
+    // Read in Leaderboard.txt File
+    std::ifstream ldb("Leaderboard.txt");
+    
+    // Create Vector to Store Leaderboard In
+    std::vector<int> data;
+    
+    // Iterate Through Contents of Leaderboard.txt File and Append to Vector
+    int element;
+    while (ldb >> element)
     {
-        std::ofstream file { "Leaderboard.txt" };
-    };
+        data.push_back(element);
+    }
+    // Sort Leaderboard Data Vector in Descending Order
+    std::sort(data.begin(), data.end(), std::greater<int>());
+
+    // Resize Leaderboard Data Vector to Length of 10
+    if (data.size() > 10)
+    {
+        data.resize(10);
+    }
+
+    // Print Leaderboard
+    for (int i = 0; i < data.size(); i++)
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(70));
+        std::cout << i+1 << ". " << data.at(i) << "  |  " << std::flush;
+    }
 }
 
 void write_leaderboard(Player &player)
 {
-    std::ofstream leaderboardtxt("Leaderboard.txt");
-    leaderboardtxt << player.balance;
-    leaderboardtxt.close();
+    std::ofstream leaderboardtxt("Leaderboard.txt", std::ios::app);
+    leaderboardtxt << "\n" << player.get_balance();
 }

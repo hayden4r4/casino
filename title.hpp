@@ -47,9 +47,13 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     slow_text(credits, 50);
     std::cout << "\n"
               << std::endl;
+    
+    std::string leaderboard_title = "\nTop 10 Leaderboard:\n\n";
+    slow_text(leaderboard_title, 50);
+    show_leaderboard();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(700));
-    std::string balance_string = "Your Balance is: $";
+    std::string balance_string = "\n\nYour Balance is: $";
     slow_text(balance_string, 50);
     std::cout << player.get_balance() << "\n"
               << std::endl;

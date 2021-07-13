@@ -4,8 +4,8 @@
 #include <thread>
 #include <chrono>
 #include <vector>
+#include "leaderboard.hpp"
 #include "title.hpp"
-// #include "leaderboard.hpp"
 #include "selector.hpp"
 #include "luckynumber.hpp"
 
@@ -21,7 +21,8 @@ void begin(Player &player)
             // Game Choice 0 (Exit) - Saves to Leaderboard and Exits
             while (player.get_game_choice() == 0)
             {
-                // Save to leaderboard
+                // Save to leaderboard and Exit
+                write_leaderboard(player);
                 exit(0);
             }
 
@@ -39,7 +40,8 @@ void begin(Player &player)
         };
         if (player.get_balance() > 0 && player.get_walk() == 1)
         {
-            // Save to leaderboard
+            // Save to leaderboard and exit
+            write_leaderboard(player);
             exit(0);
         }
 
