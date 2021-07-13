@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Casino.dir/main.cpp.o -o Casino 
