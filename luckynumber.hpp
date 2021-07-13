@@ -62,7 +62,7 @@ void lucky_number(Player &player, bool first_run)
         std::string welcome = "\nWelcome to the Lucky Number Game.  Here's the Rules:";
         slow_text(welcome, 50);
         std::cout << std::endl;
-        std::string lucky_number_rules = "We are going to pick a random number between 1 & 5.\nYou have three attmepts to guess our number.\nIf you miss all three attempts you lose $10.\nIf you get it right, we start over with a different number.\nThe less attempts it takes for you to guess the number, the more you make.\n\nHere are the rewards:\n\n 1st Attempt = $10\n 2nd Attempt = $7\n 3rd Attempt = $5\n\nLet's Play.....:\n";
+        std::string lucky_number_rules = "We are going to pick a random number between 1 & 5.\nYou have three attempts to guess our number.\nIf you miss all three attempts you lose $10.\nIf you get it right, we start over with a different number.\nThe less attempts it takes for you to guess the number, the more you make.\n\nHere are the rewards:\n\n 1st Attempt = $10\n 2nd Attempt = $7\n 3rd Attempt = $5\n\nLet's Play.....:\n";
         slow_text(lucky_number_rules, 50);
         first_run = 1;
     }
@@ -76,7 +76,7 @@ void lucky_number(Player &player, bool first_run)
             std::cin >> guess;
             while ((guess == 0) || (guess > 5))
             {
-                std::cout << "This guess is invalid, please choose a number between 1 & 5\n";
+                std::cout << "Sorry buddy that's not a valid input, choose a number between 1 & 5\n";
                 std::cin >> guess;
             }
             attrs.set_guess(guess);
@@ -142,6 +142,10 @@ void lucky_number(Player &player, bool first_run)
         player.add_balance(-10);
         std::cout << "You Lose! We will be taking $10, Thanks for Your Donation to the House!\n";
         std::cout << "Your New Balance is: $" << player.get_balance() << std::endl;
+        if (player.get_balance() < 10)
+        {
+            selector(player);
+        }
         std::cout << " 1. Replay\n 2. Choose Another Game\n 3. Walk" << std::endl;
         int choice;
         std::cin >> choice;

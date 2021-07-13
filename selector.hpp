@@ -4,6 +4,8 @@ void selector(Player& player){
 
     std::this_thread::sleep_for(std::chrono::milliseconds(700));
 
+    std::string exit_option = "0. Save Score and Exit\n";
+    slow_text(exit_option, 50);
     std::string option_1 = "1. Lucky Number  -  $10 Minimum\n";
     slow_text(option_1, 50);
 

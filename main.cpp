@@ -3,25 +3,34 @@
 #include <string>
 #include <thread>
 #include <chrono>
+#include <vector>
 #include "title.hpp"
-#include "leaderboard.hpp"
+// #include "leaderboard.hpp"
 #include "selector.hpp"
 #include "luckynumber.hpp"
 
 void begin(Player &player)
 {
+    bool first_run = 0;
     show_title(player);
     while (player.get_game_status() == 0)
     {
         while (player.get_balance() > 0 && player.get_walk() == 0)
         {
             selector(player);
+            // Game Choice 0 (Exit) - Saves to Leaderboard and Exits
+            while (player.get_game_choice() == 0)
+            {
+                // Save to leaderboard
+                exit(0);
+            }
 
+            // Game Choice 1 (Lucky Number) - Requires $10
             while ((player.get_game_choice() == 1) && (player.get_balance() >= 10))
             {
-                bool first_run = 0;
                 lucky_number(player, first_run);
             }
+            // Game Choice 1 with < $10
             while ((player.get_game_choice() == 1) && (player.get_balance() < 10))
             {
                 std::cout << "Sorry this game requires at least $10 to play!\nPlease choose another game." << std::endl;
@@ -30,7 +39,8 @@ void begin(Player &player)
         };
         if (player.get_balance() > 0 && player.get_walk() == 1)
         {
-            // Save to leaderboard and exit
+            // Save to leaderboard
+            exit(0);
         }
 
         else
@@ -51,7 +61,7 @@ int end_game_menu(Player &player)
     }
     else if (restart_string == "N" || "n" || "no" || "No")
     {
-        return 0;
+        exit(0);
     }
     else
     {
@@ -65,11 +75,11 @@ int main()
 {
     Player player;
     player.init();
-    if (player.get_game_status() == 0)
+    while (player.get_game_status() == 0)
     {
         begin(player);
     }
-    else if (player.get_game_status() == 1)
+    while (player.get_game_status() == 1)
     {
         end_game_menu(player);
     }
