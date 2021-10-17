@@ -7,7 +7,7 @@ void slow_text(std::string string_arg, int sleep)
     }
 }
 
-int show_title(Player &player)
+int show_title()
 {
     std::cout << "                                                 " << std::flush;
     std::string welcome_text = "Welcome to the";
@@ -55,7 +55,7 @@ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     std::this_thread::sleep_for(std::chrono::milliseconds(700));
     std::string balance_string = "\n\nYour Balance is: $";
     slow_text(balance_string, 50);
-    std::cout << player.get_balance() << "\n"
+    std::cout << player.balance << "\n"
               << std::endl;
 
     std::this_thread::sleep_for(std::chrono::milliseconds(700));

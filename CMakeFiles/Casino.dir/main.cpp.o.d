@@ -1,6 +1,5 @@
-CMakeFiles/Casino.dir/main.cpp.o: /mnt/c/c++/projects/casino/main.cpp \
- /usr/include/stdc-predef.h /mnt/c/c++/projects/casino/Player.hpp \
- /usr/include/c++/9/iostream \
+CMakeFiles/Casino.dir/main.cpp.o: /mnt/c/C++/Projects/Casino/main.cpp \
+ /usr/include/stdc-predef.h /usr/include/c++/9/iostream \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/os_defines.h \
  /usr/include/features.h /usr/include/x86_64-linux-gnu/sys/cdefs.h \
@@ -159,7 +158,8 @@ CMakeFiles/Casino.dir/main.cpp.o: /mnt/c/c++/projects/casino/main.cpp \
  /usr/include/c++/9/backward/auto_ptr.h /usr/include/c++/9/vector \
  /usr/include/c++/9/bits/stl_vector.h \
  /usr/include/c++/9/bits/stl_bvector.h /usr/include/c++/9/bits/vector.tcc \
- /mnt/c/c++/projects/casino/leaderboard.hpp /usr/include/c++/9/fstream \
+ /mnt/c/C++/Projects/Casino/player.hpp \
+ /mnt/c/C++/Projects/Casino/leaderboard.hpp /usr/include/c++/9/fstream \
  /usr/include/c++/9/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/9/bits/c++io.h \
@@ -169,6 +169,6 @@ CMakeFiles/Casino.dir/main.cpp.o: /mnt/c/c++/projects/casino/main.cpp \
  /usr/include/c++/9/bits/algorithmfwd.h \
  /usr/include/c++/9/bits/stl_heap.h \
  /usr/include/c++/9/bits/uniform_int_dist.h \
- /mnt/c/c++/projects/casino/title.hpp \
- /mnt/c/c++/projects/casino/selector.hpp \
- /mnt/c/c++/projects/casino/luckynumber.hpp /usr/include/c++/9/stdlib.h
+ /mnt/c/C++/Projects/Casino/title.hpp \
+ /mnt/c/C++/Projects/Casino/selector.hpp \
+ /mnt/c/C++/Projects/Casino/luckynumber.hpp /usr/include/c++/9/stdlib.h

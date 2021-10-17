@@ -54,10 +54,10 @@ RM = /usr/lib/cmake-3.20.5-linux-x86_64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /mnt/c/c++/projects/casino
+CMAKE_SOURCE_DIR = /mnt/c/C++/Projects/Casino
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /mnt/c/c++/projects/casino/build
+CMAKE_BINARY_DIR = /mnt/c/C++/Projects/Casino/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -81,14 +81,14 @@ clean: CMakeFiles/Casino.dir/clean
 CMakeFiles/Casino.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Casino.dir/build.make CMakeFiles/Casino.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Casino.dir/build.make CMakeFiles/Casino.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/c++/projects/casino/build/CMakeFiles --progress-num=1,2 "Built target Casino"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/mnt/c/C++/Projects/Casino/build/CMakeFiles --progress-num=1,2 "Built target Casino"
 .PHONY : CMakeFiles/Casino.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Casino.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/c++/projects/casino/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/C++/Projects/Casino/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/Casino.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/c++/projects/casino/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/C++/Projects/Casino/build/CMakeFiles 0
 .PHONY : CMakeFiles/Casino.dir/rule
 
 # Convenience name for target.

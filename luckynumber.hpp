@@ -13,6 +13,7 @@ class Lucky_number_attrs
 {
 private:
     int attempts, secret, guess, choice;
+    bool first_run;
 
 public:
     void init()
@@ -50,22 +51,31 @@ public:
     {
         return choice;
     }
+    void set_first_run(bool first_run_bool)
+    {
+        first_run = first_run_bool;
+    }
+    bool get_first_run()
+    {
+        return first_run;
+    }
 };
 
-void lucky_number(Player &player, bool first_run)
+void lucky_number(bool first_run_bool)
 {
     Lucky_number_attrs attrs;
     attrs.init();
-    if (first_run == 0)
+    attrs.set_first_run(first_run_bool);
+    if (attrs.get_first_run() == true)
     {
         std::string welcome = "\nWelcome to the Lucky Number Game.  Here's the Rules:";
         slow_text(welcome, 50);
         std::cout << std::endl;
         std::string lucky_number_rules = "We are going to pick a random number between 1 & 5.\nYou have three attempts to guess our number.\nIf you miss all three attempts you lose $10.\nIf you get it right, we start over with a different number.\nThe less attempts it takes for you to guess the number, the more you make.\n\nHere are the rewards:\n\n 1st Attempt = $10\n 2nd Attempt = $7\n 3rd Attempt = $5\n\nLet's Play.....:\n";
         slow_text(lucky_number_rules, 50);
-        first_run = 1;
+        attrs.set_first_run(false);
     }
-    while ((player.get_balance() >= 10) && (attrs.get_choice() == 0))
+    while ((player.balance >= 10) && (attrs.get_choice() == 0))
     {
         while (attrs.get_attempts() < 3)
         {
@@ -85,20 +95,20 @@ void lucky_number(Player &player, bool first_run)
                 std::cout << "\nYou Got It!\n";
                 if (attrs.get_attempts() == 1)
                 {
-                    player.add_balance(10);
+                    player.balance += 10;
                     std::cout << "You Won $10 Dollars\n";
                 }
                 else if (attrs.get_attempts() == 2)
                 {
-                    player.add_balance(7);
+                    player.balance += 7;
                     std::cout << "You Won $7 Dollars\n";
                 }
                 else if (attrs.get_attempts() == 3)
                 {
-                    player.add_balance(5);
+                    player.balance += 5;
                     std::cout << "You Won $5 Dollars\n";
                 }
-                std::cout << "\nYour New Balance is: $" << player.get_balance() << std::endl;
+                std::cout << "\nYour New Balance is: $" << player.balance << std::endl;
                 std::cout << "\n 1. Replay\n 2. Choose Another Game\n 3. Walk" << std::endl;
                 int choice;
                 std::cin >> choice;
@@ -113,18 +123,16 @@ void lucky_number(Player &player, bool first_run)
                 {
                     if (attrs.get_choice() == 1)
                     {
-                        lucky_number(player, first_run);
+                        lucky_number(false);
                     }
                     else if (attrs.get_choice() == 2)
                     {
                         attrs.init();
-                        selector(player);
+                        selector();
                     }
                     else if (attrs.get_choice() == 3)
                     {
-                        // Save to leaderboard and exit
-                        write_leaderboard(player);
-                        exit(0);
+                        player.walk = true;
                     }
                 }
             }
@@ -140,15 +148,14 @@ void lucky_number(Player &player, bool first_run)
                 }
             }
         }
-        player.add_balance(-10);
+        player.balance -= 10;
         std::cout << "You Lose! We will be taking $10, Thanks for Your Donation to the House!\n";
-        std::cout << "Your New Balance is: $" << player.get_balance() << std::endl;
-        if (player.get_balance() < 10)
+        std::cout << "Your New Balance is: $\n" << player.balance << std::endl;
+        if (player.balance > 10)
         {
-            attrs.init();
-            selector(player);
+            std::cout << " 1. Replay\n";
         }
-        std::cout << " 1. Replay\n 2. Choose Another Game\n 3. Walk" << std::endl;
+        std::cout << " 2. Choose Another Game\n 3. Walk" << std::endl;
         int choice;
         std::cin >> choice;
         attrs.set_choice(choice);
@@ -162,21 +169,25 @@ void lucky_number(Player &player, bool first_run)
         {
             if (attrs.get_choice() == 1)
             {
-                lucky_number(player, first_run);
+                while ((player.balance < 10) && (attrs.get_choice() == 1))
+                {
+                    std::cout << "Sorry buddy, you're too poor for that, come back when you have $10...\nChoose again:\n";
+                    std::cin >> choice;
+                    attrs.set_choice(choice);
+                }
+                lucky_number(false);
             }
             else if (attrs.get_choice() == 2)
             {
                 attrs.init();
-                selector(player);
+                selector();
             }
             else if (attrs.get_choice() == 3)
             {
-                // Save to leaderboard and exit
-                write_leaderboard(player);
-                exit(0);
+                player.walk = true;
             }
         }
     }
     attrs.init();
-    selector(player);
+    selector();
 }

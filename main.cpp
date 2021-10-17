@@ -1,65 +1,56 @@
-#include "Player.hpp"
 #include <iostream>
 #include <string>
 #include <thread>
 #include <chrono>
 #include <vector>
+#include "player.hpp"
 #include "leaderboard.hpp"
 #include "title.hpp"
 #include "selector.hpp"
 #include "luckynumber.hpp"
 
-void begin(Player &player)
+struct Player player = {
+    .balance = 10,
+    .game_choice = -1,
+    .walk = false,
+    .game_over = false,
+    .first_run = true};
+
+void begin()
 {
-    bool first_run = 0;
-    show_title(player);
-    while (player.get_game_status() == 0)
+    player.first_run = false;
+    show_title();
+    while (player.balance > 0 && player.walk == false)
     {
-        while (player.get_balance() > 0 && player.get_walk() == 0)
-        {
-            selector(player);
-            // Game Choice 0 (Exit) - Saves to Leaderboard and Exits
-            while (player.get_game_choice() == 0)
-            {
-                // Save to leaderboard and Exit
-                write_leaderboard(player);
-                exit(0);
-            }
+        selector();
 
-            // Game Choice 1 (Lucky Number) - Requires $10
-            while ((player.get_game_choice() == 1) && (player.get_balance() >= 10))
-            {
-                lucky_number(player, first_run);
-            }
-            // Game Choice 1 with < $10
-            while ((player.get_game_choice() == 1) && (player.get_balance() < 10))
-            {
-                std::cout << "Sorry this game requires at least $10 to play!\nPlease choose another game." << std::endl;
-                selector(player);
-            }
-        };
-        if (player.get_balance() > 0 && player.get_walk() == 1)
+        // Game Choice 1 (Lucky Number) - Requires $10
+        while ((player.game_choice == 1) && (player.balance >= 10))
         {
-            // Save to leaderboard and exit
-            write_leaderboard(player);
-            exit(0);
-        }
-
-        else
-        {
-            std::cout << "Uh-oh Looks Like Your Current Balance is $0, Sorry But We Don't Run a Charity, Come Back When You Aren't Broke!!\n Restart?    Y/n" << std::endl;
-            player.set_game_status(1);
+            lucky_number(true);
         }
     };
-}
+    if (player.balance > 0 && player.walk == true)
+    {
+        // Save to leaderboard and exit
+        write_leaderboard();
+        exit(0);
+    }
 
-int end_game_menu(Player &player)
+    else
+    {
+        std::cout << "Uh-oh Looks Like Your Current Balance is $0, Sorry But We Don't Run a Charity, Come Back When You Aren't Broke!!\n Restart?    Y/n" << std::endl;
+        player.game_over = true;
+    }
+};
+
+int end_game_menu()
 {
     std::string restart_string;
     std::cin >> restart_string;
     if (restart_string == "Y" || "y" || "yes" || "Yes")
     {
-        begin(player);
+        begin();
     }
     else if (restart_string == "N" || "n" || "no" || "No")
     {
@@ -68,22 +59,20 @@ int end_game_menu(Player &player)
     else
     {
         std::cout << "Sorry that's not a valid option buddy, please enter Y/n..." << std::endl;
-        end_game_menu(player);
+        end_game_menu();
     }
     return 0;
 }
 
 int main()
 {
-    Player player;
-    player.init();
-    while (player.get_game_status() == 0)
+    while (player.game_over == false)
     {
-        begin(player);
+        begin();
     }
-    while (player.get_game_status() == 1)
+    while (player.game_over == true)
     {
-        end_game_menu(player);
+        end_game_menu();
     }
     return 0;
 }

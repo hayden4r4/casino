@@ -1,0 +1,7 @@
+/mnt/c/C++/Projects/Casino/CMakeFiles/install/strip.dir
+/mnt/c/C++/Projects/Casino/CMakeFiles/install/local.dir
+/mnt/c/C++/Projects/Casino/CMakeFiles/Casino.dir
+/mnt/c/C++/Projects/Casino/CMakeFiles/rebuild_cache.dir
+/mnt/c/C++/Projects/Casino/CMakeFiles/edit_cache.dir
+/mnt/c/C++/Projects/Casino/CMakeFiles/install.dir
+/mnt/c/C++/Projects/Casino/CMakeFiles/list_install_components.dir

@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/mnt/c/C++/Projects/Casino/build",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -g -o CMakeFiles/Casino.dir/main.cpp.o -c /mnt/c/C++/Projects/Casino/main.cpp",
+  "file": "/mnt/c/C++/Projects/Casino/main.cpp"
+}
+]
